@@ -15,16 +15,8 @@ private:
     unsigned int overheatHits;
     bool isFrozen;
 
-    // ================= PERSONALIZATION =================
-    /*
-     * Personalization Rule (X = last digit of student ID):
-     *
-     * X ∈ {0,1,2,3} → LOW_POWER threshold = 30°C
-     * X ∈ {4,5,6}   → LOW_POWER threshold = 45°C
-     * X ∈ {7,8,9}   → LOW_POWER threshold = 20°C
-     */
     static double lowPowerLimit() {
-        return 45.0; // CHANGE according to your ID
+        return 45.0;
     }
 
     static double overheatLimit() {
@@ -35,7 +27,6 @@ private:
         return "HAMMAD";
     }
 
-    // Decide mode purely from temperature
     Mode evaluateMode() {
         if (temp >= overheatLimit())
             return Mode::OVERHEAT;
@@ -46,7 +37,6 @@ private:
         return Mode::LOW_POWER;
     }
 
-    // Handle overheat side effects
     void registerOverheat() {
         overheatHits++;
         if (overheatHits > 2) {
